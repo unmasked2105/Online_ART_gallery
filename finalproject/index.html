@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Art Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        // Load the cart from localStorage or initialize an empty array
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function addToCart(id, name, price) {
+            const item = { id, name, price };
+            cart.push(item);
+            updateCart();
+            localStorage.setItem('cart', JSON.stringify(cart)); // Save to localStorage
+            alert(`${name} has been added to your cart!`);
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-list');
+            const totalAmount = document.getElementById('total-amount');
+            if (cartList) {
+                cartList.innerHTML = '';
+                let total = 0;
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - $${item.price}`;
+                    cartList.appendChild(li);
+                    total += item.price;
+                });
+                totalAmount.textContent = total;
+            }
+        }
+
+
+        document.getElementById('contact')?.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert('Thank you, ' + name + '! Your message has been received.');
+                document.getElementById('contact').reset();
+            } else {
+                alert('Please fill in all the fields.');
+            }
+        });
+
+        window.onload = function() {
+            updateCart();
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Online Art Gallery</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="category.html">Categories</a>
+            <a href="cart.html">Cart</a>
+            <a href="contact.php">Contact</a>
+            <a href="search.html">Search</a>
+            <div class="btn-container">
+            </div>
+            
+        </nav>
+    </header>
+
+    <main>
+        <marquee behavior="alternate" direction="right" scrollamount="10">!!!Offer Offer Offer!!!</marquee>
+        <section id="featured">
+            <h2>Featured Artworks</h2>
+            <div class="gallery">
+                <div class="art-item">
+                    <a href="images/art1.jpg"><img src="images/art1.jpg" alt="Starry Night"></a>
+                    <h3>Starry Night</h3>
+                    <p>By Vincent van Gogh</p>
+                    <button onclick="addToCart(1, 'Starry Night', 1000)">Add to Cart</button>
+                    <label>$1500</label>
+                </div>
+                <div class="art-item">
+                    <a href="images/art2.jpg"><img src="images/art2.jpg" alt="Deep Shah Art"></a>
+                    <h3>Deep Shah Art</h3>
+                    <p>By Deep Shah</p>
+                    <button onclick="addToCart(2, 'Deep Shah Art', 1500)">Add to Cart</button>
+                    <label>$1500</label>
+                </div>
+                <div class="art-item">
+                    <a href="images/Chennakeshava.jpeg"><img src="images/Chennakeshava.jpeg" alt="ChennaKeshava Temple"></a>
+                    <h3>ChennaKeshava Temple</h3>
+                    <p>By Vincent Gopal</p>
+                    <button onclick="addToCart(3, 'ChennaKeshava Temple', 2000)">Add to Cart</button>
+                    <label>$2000</label>
+                </div>
+                <div class="art-item">
+                    <a href="images/Ram Mandir.jpg"><img src="images/Ram Mandir.jpg" alt="Ram Mandir Ayodhya"></a>
+                    <h3>Ram Mandir Ayodhya</h3>
+                    <p>By Satyam Kumar Mishra</p>
+                    <button onclick="addToCart(4, 'Ram Mandir Ayodhya', 2500)">Add to Cart</button>
+                    <label>$2500</label>
+                </div>
+            </div>
+            
+            <div class="gallery2">
+                <div class="art-item">
+                    <a href="images/Shiva.jpg"><img src="images/Shiva.jpg" alt="Lord Shiva"></a>
+                    <h3>Lord Shiva</h3>
+                    <p>By Satyam Mishra</p>
+                    <button onclick="addToCart(5, 'Lord Shiva', 2000)">Add to Cart</button>
+                    <label>$2000</label>
+                </div>
+                <div class="art-item">
+                    <a href="images/Nature.webp"><img src="images/Nature.webp" alt="Natural Beauty"></a>
+                    <h3>Nature</h3>
+                    <p>By Md. Shekh Al Ajair Ansari</p>
+                    <button onclick="addToCart(6, 'Nature', 1000)">Add to Cart</button>
+                    <label>$1000</label>
+                </div>
+                <div class="art-item">
+                    <a href="images/Buddha.jpg"><img src="images/Buddha.jpg" alt="Gautam Buddha"></a>
+                    <h3>Gautam Buddha</h3>
+                    <p>By Suvash Sharma</p>
+                    <button onclick="addToCart(7, 'Gautam Buddha', 3000)">Add to Cart</button>
+                    <label>$3000</label>
+                </div>
+                <div class="art-item">
+                    <a href="images/Natraj.jpg"><img src="images/Natraj.jpg" alt="Natraj"></a>
+                    <h3>Natraj</h3>
+                    <p>By Aditya Goal</p>
+                    <button onclick="addToCart(8, 'Natraj', 5000)">Add to Cart</button>
+                    <label>$5000</label>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Online Art Gallery</p>
+    </footer>
+</body>
+</html>
